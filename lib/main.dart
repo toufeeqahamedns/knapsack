@@ -1,20 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:knapsack/blocs/app_bloc.dart';
+import 'package:knapsack/knapsack.dart';
 
 void main() {
-  runApp(KnapSack());
-}
-
-class KnapSack extends StatelessWidget {
-  const KnapSack({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text("KnapSack Illustration"),
-        ),
-      ),
-    );
-  }
+  runApp(
+    BlocProvider<AppBloc>(
+      create: (_) => AppBloc(),
+      child: KnapSack(),
+    ),
+  );
 }
