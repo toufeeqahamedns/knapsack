@@ -9,8 +9,11 @@ class AppState extends Equatable {
 
   const AppState.generatingData() : this._(status: AppStatus.generatingDataset);
 
+  const AppState.datasetGenerated()
+      : this._(status: AppStatus.datasetGenerated);
+
   @override
   List<Object?> get props => [status];
 }
 
-enum AppStatus { unknown, generatingDataset }
+enum AppStatus { unknown, generatingDataset, datasetGenerated }

@@ -5,6 +5,10 @@ abstract class AppEvent extends Equatable {
 }
 
 class GenerateDataSet extends AppEvent {
+  final int value;
+
+  GenerateDataSet(this.value);
+
   @override
   List<Object?> get props => [];
 }

@@ -14,6 +14,9 @@ dependencies:
 
   flutter_bloc: ^7.0.1
   equatable: ^2.0.3
+
+  fl_chart: ^0.36.2
+  random_color: ^1.0.6-nullsafety
   
   cupertino_icons: ^1.0.2
 
