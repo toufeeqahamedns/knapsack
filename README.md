@@ -13,6 +13,4 @@ Generated dataset is visiualzied with a bar-graph having itemWeight in Y-axis an
 
 Then you need to fill the sack to visualized the weigth and value of the items filled.
 
-![Screenshot 1](/screenshots/Screenshot1.png?raw=true "Screenshot 1")
-![Screenshot 2](/screenshots/Screenshot2.png?raw=true "Screenshot 2")
-![Screenshot 3](/screenshots/Screenshot3.png?raw=true "Screenshot 3")
+![Screenshot 1](/screenshots/Screenshot1.png?raw=true "Screenshot 1")![Screenshot 2](/screenshots/Screenshot2.png?raw=true "Screenshot 2")![Screenshot 3](/screenshots/Screenshot3.png?raw=true "Screenshot 3")
