@@ -10,5 +10,14 @@ class GenerateDataSet extends AppEvent {
   GenerateDataSet(this.value);
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [value];
+}
+
+class FillSack extends AppEvent {
+  final int sackSize;
+
+  FillSack(this.sackSize);
+
+  @override
+  List<Object?> get props => [sackSize];
 }
