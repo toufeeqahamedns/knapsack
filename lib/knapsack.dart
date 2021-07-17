@@ -6,6 +6,7 @@ import 'package:knapsack/blocs/app_bloc.dart';
 import 'package:knapsack/blocs/app_bloc_event.dart';
 import 'package:knapsack/blocs/app_bloc_state.dart';
 import 'package:knapsack/dataset_visualizer.dart';
+import 'package:knapsack/sack_visualizer.dart';
 
 class KnapSack extends StatefulWidget {
   const KnapSack({Key? key}) : super(key: key);
@@ -16,18 +17,18 @@ class KnapSack extends StatefulWidget {
 
 class _KnapSackState extends State<KnapSack> {
   double itemSize = (Random().doubleInRange(5, 10)).roundToDouble();
-  double sackSize = (Random().doubleInRange(10, 50)).roundToDouble();
+  double sackSize = 10;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         body: SafeArea(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ListView(
               children: [
-                Text("Set number of items between 5-10: ${itemSize.toInt()}"),
+                Center(child: Text("Set number of items between 5-10: ${itemSize.toInt()}")),
                 Slider(
                     min: 5,
                     max: 10,
@@ -39,13 +40,15 @@ class _KnapSackState extends State<KnapSack> {
                       });
                     }),
                 ElevatedButton(
-                  child: Text("Generate Dataset"),
-                  onPressed: () => context.read<AppBloc>().add(
-                        GenerateDataSet(
-                          itemSize.toInt(),
-                        ),
-                      ),
-                ),
+                    child: Text("Generate Dataset"),
+                    onPressed: () {
+                      sackSize = (Random().doubleInRange(10, 50)).roundToDouble();
+                      context.read<AppBloc>().add(
+                            GenerateDataSet(
+                              itemSize.toInt(),
+                            ),
+                          );
+                    }),
                 SizedBox(height: 8.0),
                 BlocBuilder<AppBloc, AppState>(
                   builder: (BuildContext context, AppState state) {
@@ -84,16 +87,24 @@ class _KnapSackState extends State<KnapSack> {
                             });
                           }),
                       ElevatedButton(
-                        child: Text("Fill Sack"),
+                        child: Container(
+                            width: double.infinity,
+                            child: Center(child: Text("Fill Sack"))),
                         onPressed: () => context.read<AppBloc>().add(
-                              FillSack(sackSize.toInt()),
+                              FillSack(
+                                sackSize.toInt(),
+                              ),
                             ),
                       ),
+                      SizedBox(height: 8.0),
                       BlocBuilder<AppBloc, AppState>(
                         builder: (BuildContext context, AppState state) {
                           switch (state.status) {
                             case AppStatus.sackFilled:
-                              return Text("Sack Filled...");
+                              return SackVisualizer(
+                                  context.watch<AppBloc>().itemsSelected,
+                                  context.watch<AppBloc>().maxValueObtained,
+                                  context.watch<AppBloc>().maxWeightObtained);
                             case AppStatus.fillingSack:
                               return Text("Filling Sack...");
                             case AppStatus.unknown:

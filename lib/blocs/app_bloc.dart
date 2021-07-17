@@ -11,7 +11,8 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
   late List<KnapsackItem> dataSet;
   List<KnapsackItem> itemsSelected = [];
-  late int maxValueObtained;
+  int maxValueObtained = 0;
+  int maxWeightObtained = 0;
 
   @override
   Stream<AppState> mapEventToState(AppEvent event) async* {
@@ -43,6 +44,8 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   }
 
   void computeKnapsack(int sackSize, List<KnapsackItem> dataSet, int n) {
+    print("SackSize: $sackSize");
+
     List<List<int>> k =
         List.generate(n + 1, (_) => List.generate(sackSize + 1, (_) => 0));
 
@@ -64,19 +67,26 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       }
     }
 
+    maxValueObtained = 0;
     maxValueObtained = k[n][sackSize];
     print("Max Value obtained: $maxValueObtained");
+
+    var res = maxValueObtained;
     w = sackSize;
+    
     itemsSelected.clear();
-    for (i = n; i > 0 && maxValueObtained > 0; i--) {
-      if (maxValueObtained == k[i - 1][w]) {
+    maxWeightObtained = 0;
+
+    for (i = n; i > 0 && res > 0; i--) {
+      if (res == k[i - 1][w]) {
         continue;
       } else {
         itemsSelected.add(dataSet[i - 1]);
 
         print("${dataSet[i - 1].itemWeight} ");
+        maxWeightObtained += dataSet[i - 1].itemWeight;
 
-        maxValueObtained = maxValueObtained - dataSet[i - 1].itemValue;
+        res = res - dataSet[i - 1].itemValue;
         w = w - dataSet[i - 1].itemWeight;
       }
     }
