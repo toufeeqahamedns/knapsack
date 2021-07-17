@@ -43,7 +43,7 @@ class SackVisualizer extends StatelessWidget {
                         sections: List.generate(
                           items.length,
                           (i) {
-                            final fontSize = 16.0;  
+                            final fontSize = 16.0;
                             final radius = 50.0;
                             return PieChartSectionData(
                               color: items[i].itemColor,
@@ -53,7 +53,7 @@ class SackVisualizer extends StatelessWidget {
                               titleStyle: TextStyle(
                                   fontSize: fontSize,
                                   fontWeight: FontWeight.bold,
-                                  color: const Color(0xffffffff)),
+                                  color: Colors.black),
                             );
                           },
                         ),
@@ -62,6 +62,22 @@ class SackVisualizer extends StatelessWidget {
                     Text(
                       "$maxValue",
                       style: TextStyle(color: Colors.white),
+                    ),
+                    Positioned(
+                      top: 4.0,
+                      right: 4.0,
+                      child: Row(
+                        children: [
+                          Container(
+                            color: Colors.white,
+                            width: 16.0,
+                            height: 16.0,
+                          ),
+                          SizedBox(width: 4.0),
+                          Text("Empty Space",
+                              style: TextStyle(color: Colors.white),),
+                        ],
+                      ),
                     )
                   ],
                 ),

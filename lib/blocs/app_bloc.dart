@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:knapsack/blocs/app_bloc_event.dart';
 import 'package:knapsack/blocs/app_bloc_state.dart';
@@ -44,8 +45,6 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   }
 
   void computeKnapsack(int sackSize, List<KnapsackItem> dataSet, int n) {
-    print("SackSize: $sackSize");
-
     List<List<int>> k =
         List.generate(n + 1, (_) => List.generate(sackSize + 1, (_) => 0));
 
@@ -73,7 +72,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
     var res = maxValueObtained;
     w = sackSize;
-    
+
     itemsSelected.clear();
     maxWeightObtained = 0;
 
@@ -83,13 +82,19 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       } else {
         itemsSelected.add(dataSet[i - 1]);
 
-        print("${dataSet[i - 1].itemWeight} ");
         maxWeightObtained += dataSet[i - 1].itemWeight;
 
         res = res - dataSet[i - 1].itemValue;
         w = w - dataSet[i - 1].itemWeight;
       }
     }
+
+    if (w != 0) {
+      itemsSelected.add(KnapsackItem(0, w, Colors.white));
+    }
+
+    print("res $res");
+    print("w: $w");
   }
 }
 

@@ -75,7 +75,7 @@ class DatasetVisualizer extends StatelessWidget {
                     barRods: [
                       BarChartRodData(
                           y: items[index].itemWeight.toDouble(),
-                          width: 16.0,
+                          width: 32.0,
                           colors: [items[index].itemColor]),
                     ],
                   );

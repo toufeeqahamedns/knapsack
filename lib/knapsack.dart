@@ -59,10 +59,10 @@ class _KnapSackState extends State<KnapSack> {
                         return DatasetVisualizer(
                             context.watch<AppBloc>().dataSet);
                       case AppStatus.generatingDataset:
-                        return Text("Generating dataset...");
+                        return Center(child: Text("Generating dataset..."));
                       case AppStatus.unknown:
                       default:
-                        return Text("Generate DataSet to continue...");
+                        return Center(child: Text("Generate DataSet to continue..."));
                     }
                   },
                 ),
